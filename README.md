@@ -18,6 +18,8 @@ The pipeline is the following:
 
 The bot is hosted on Yandex Cloud Function and is written in Python. His name is LucasForecasterBot; feel free to chat with him.
 
+You can watch an interaction with the bot in demo.mkv.
+
 ### How to create another bot:
 * Create the bot with Telegram's BotFather;
 * Register in Yandex.Weather as a developer and fill your api token in bot's source code (located in start.py);
@@ -28,5 +30,3 @@ The bot is hosted on Yandex Cloud Function and is written in Python. His name is
 curl -F "url=https://functions.yandexcloud.net/<function_name>" "https://api.telegram.org/bot<bot_token>/setWebhook"
 ```
 * Open a Telegram client, search the bot by name and choose 'START'.
-
-You can watch an interaction with the bot in demo.mkv.
