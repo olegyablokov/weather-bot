@@ -27,3 +27,6 @@ The bot is hosted on Yandex Cloud Function and is written in Python. His name is
 ```
 curl -F "url=https://functions.yandexcloud.net/<function_name>" "https://api.telegram.org/bot<bot_token>/setWebhook"
 ```
+* Open a Telegram client, search the bot by name and choose 'START'.
+
+You can watch an interaction with the bot in demo.mkv.
