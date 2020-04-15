@@ -46,15 +46,7 @@ def get_forecast(forecast_type):
         'limit={0}'
     headers = {'X-Yandex-API-Key': YANDEX_WEATHER_API_TOKEN}
 
-    def get_forecast_for_current_day(contents):
-        return '<b>Прогноз на сегодня:</b>\n' + get_daily_forecast_text(
-            contents['fact']['condition'],
-            contents['fact']['temp'],
-            contents['fact']['humidity'],
-            contents['fact']['pressure_mm'],
-            contents['fact']['wind_speed'])
-
-    def get_forecast_for_future_days(forecasts):
+    def get_forecast_text_from_forcasts(forecasts):
         forecast = ''
         for daily_forecast in forecasts:
             day = daily_forecast['parts']['day']
@@ -71,14 +63,13 @@ def get_forecast(forecast_type):
     forecast = ''
     if forecast_type == 'current':
         contents = requests.get(endpoint.format(1), headers=headers).json()
-        forecast = get_forecast_for_current_day(contents)
+        forecast = get_forecast_text_from_forcasts(contents['forecasts'][0:1])
     elif forecast_type == 'tomorrow':
         contents = requests.get(endpoint.format(2), headers=headers).json()
-        forecast = get_forecast_for_future_days(contents['forecasts'][1:2])
+        forecast = get_forecast_text_from_forcasts(contents['forecasts'][1:2])
     elif forecast_type == '7_days':
         contents = requests.get(endpoint.format(7), headers=headers).json()
-        forecast = get_forecast_for_current_day(contents) + '\n\n' + \
-            get_forecast_for_future_days(contents['forecasts'][1:])
+        forecast = get_forecast_text_from_forcasts(contents['forecasts'])
     else:
         raise('bad forecast_type')
     return forecast
